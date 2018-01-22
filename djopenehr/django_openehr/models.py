@@ -1,3 +1,7 @@
+"""
+Models live in here !
+"""
+from django.core.exceptions import ValidationError
 from django.db import models
 
 # //noticed a bit of an issue with this archetype:
@@ -109,3 +113,24 @@ class Demographics(models.Model):
 
     # gender
     # optional
+
+    def clean(self):
+        """
+        Validation that requires access to multiple fields goes here.
+        """
+        structured_name_fields = [
+            'title'
+            'given_name',
+            'middle_name',
+            'family_name',
+            'suffix'
+        ]
+        present = 0
+        for f in structured_name_fields:
+            if getattr(self, f) is not None:
+                present += 1
+        if present == 1:
+            msg = "A structured name requires at least two of {0}".format(
+                ", ".join(structured_name_fields)
+            )
+            raise ValidationError(msg)
