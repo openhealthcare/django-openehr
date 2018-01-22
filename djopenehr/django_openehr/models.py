@@ -112,8 +112,103 @@ class Demographics(models.Model):
     # optional
 
 
-class Dosage(models.Model):
+class TherapeuticDirection(models.Model):
+    # Direction sequence
+    # Count
+    # Optional
+    # min: >=1
+    direction_sequence = models.IntegerField(
+        blank=True, null=True,
+        help_text="The intended position of this direction within the overall sequence of directions."
+        validators=[MinValueValidator(1)]
+    )
+    # Dosage Implemented in TherapeuticDirectionDosage
+    # The combination of a medication dose and administration timing for a single day.
+    # Include:
     # openEHR-EHR-CLUSTER.dosage.v1 and specialisations
+
+    # Direction duration
+    # Choice
+    # Optional
+    # The length of time for which this direction should be applied.
+
+    DIRECTION_CHOICES = (
+        # The direction should be continued indefinitely.
+        ('INDEFINITE', 'Indefinite'),
+        # The direction should be continued indefinitely with a strong recommendation
+        # that it never be discontinued.
+        ('INDEFINITENTBDC', 'Indefinite - not to be discontinued')
+    )
+    # Choice of one of the following three fields:
+
+    direction_duration = models.CharField(
+        choices=DIRECTION_CHOICES, blank=True, null=True, max_length=255
+    )
+    # Duration >=0 seconds
+    direction_duration_seconds = models.IntegerField(
+        validators=[MinValueValidator(0)]
+        blank=True, null=True
+    )
+    # Text
+    direction_duration_text = models.CharField(
+        blank=True, null=True, max_length=255
+    )
+
+    # Maximum number of administrations
+    # Count
+    # Optional
+    # min: >=1
+    maximum_administrations = models.IntegerField(
+        blank=True, null=True,
+        validators=[MinValueValidator(1)]
+        help_text="The maximum number of administrations to be given for this direction."
+    )
+
+    # Direction repetition
+    # Slot ( Cluster)
+    # Optional
+
+    # Structured details about pattern of repetition for each set of daily directions.
+    # Include:
+    # nopenEHR-EHR-CLUSTER.timing_repetition.v0 and specialisations
+    # Included
+
+
+
+
+    # Additional details
+    # Slot ( Cluster)
+    # Optional, repeating
+
+    # Further details about an ordered item direction.
+
+    # Include:
+    # openEHR-EHR-CLUSTER.conditional_medication_rules.v0 and specialisations
+
+    def clean(self):
+        """
+        Validation that requires access to multiple fields goes here.
+        """
+        direction_duration_fields = [
+            'direction_duration',
+            'direction_duration_seconds',
+            'direction_duration_text'
+        ]
+        present = 0
+        for f in direction_duration_fields:
+            if getattr(self, f) is not None:
+                present += 1
+        if present > 1:
+            msg = "A direction duration may only be one of {0}".format(
+                ", ".join(structured_name_fields)
+            )
+            raise ValidationError(msg)
+
+
+class TherapeuticDirectionDosage(models.Model):
+    therapeutic_direction = models.ForeignKey(TherapeuticDirection)
+    # openEHR-EHR-CLUSTER.dosage.v1 and specialisations
+
     # Dosage sequence
     #  Count
     # Optional
@@ -218,102 +313,3 @@ class Dosage(models.Model):
     #  Text
     # Optional
     # The unit which is associated with the Alternate dose amount.
-
-
-
-class TherapeuticDirection(models.Model):
-    # Direction sequence
-    # Count
-    # Optional
-    # min: >=1
-    direction_sequence = models.IntegerField(
-        blank=True, null=True,
-        help_text="The intended position of this direction within the overall sequence of directions."
-        validators=[MinValueValidator(1)]
-    )
-
-    # Dosage
-    # Slot ( Cluster)
-    # Optional, repeating
-
-    # The combination of a medication dose and administration timing for a single day.
-    # Include:
-    # openEHR-EHR-CLUSTER.dosage.v1 and specialisations
-    dosage = models.ForeignKey(Dosage, blank=True, null=True)
-
-    # Direction duration
-    # Choice
-    # Optional
-    # The length of time for which this direction should be applied.
-
-    DIRECTION_CHOICES = (
-        # The direction should be continued indefinitely.
-        ('INDEFINITE', 'Indefinite'),
-        # The direction should be continued indefinitely with a strong recommendation
-        # that it never be discontinued.
-        ('INDEFINITENTBDC', 'Indefinite - not to be discontinued')
-    )
-    # Choice of one of the following three fields:
-
-    direction_duration = models.CharField(
-        choices=DIRECTION_CHOICES, blank=True, null=True, max_length=255
-    )
-    # Duration >=0 seconds
-    direction_duration_seconds = models.IntegerField(
-        validators=[MinValueValidator(0)]
-        blank=True, null=True
-    )
-    # Text
-    direction_duration_text = models.CharField(
-        blank=True, null=True, max_length=255
-    )
-
-    # Maximum number of administrations
-    # Count
-    # Optional
-    # min: >=1
-    maximum_administrations = models.IntegerField(
-        blank=True, null=True,
-        validators=[MinValueValidator(1)]
-        help_text="The maximum number of administrations to be given for this direction."
-    )
-
-    # Direction repetition
-    # Slot ( Cluster)
-    # Optional
-
-    # Structured details about pattern of repetition for each set of daily directions.
-    # Include:
-    # nopenEHR-EHR-CLUSTER.timing_repetition.v0 and specialisations
-    # Included
-
-
-
-
-    # Additional details
-    # Slot ( Cluster)
-    # Optional, repeating
-
-    # Further details about an ordered item direction.
-
-    # Include:
-    # openEHR-EHR-CLUSTER.conditional_medication_rules.v0 and specialisations
-
-    def clean(self):
-        """
-        Validation that requires access to multiple fields goes here.
-        """
-        direction_duration_fields = [
-            'direction_duration',
-            'direction_duration_seconds',
-            'direction_duration_text'
-        ]
-        present = 0
-        for f in direction_duration_fields:
-            if getattr(self, f) is not None:
-                present += 1
-        if present > 1:
-            msg = "A direction duration may only be one of {0}".format(
-                ", ".join(structured_name_fields)
-            )
-            raise ValidationError(msg)
