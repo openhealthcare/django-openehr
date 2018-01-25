@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Demographics(models.Model):
@@ -157,3 +158,24 @@ class Demographics(models.Model):
         blank=True,
         help_text="The administrative phenotypical gender of the individual."
     )
+
+    def clean(self):
+        """
+        Validation that requires access to multiple fields goes here.
+        """
+        structured_name_fields = [
+            'title'
+            'given_name',
+            'middle_name',
+            'family_name',
+            'suffix'
+        ]
+        present = 0
+        for f in structured_name_fields:
+            if getattr(self, f) is not None:
+                present += 1
+        if present == 1:
+            msg = "A structured name requires at least two of {0}".format(
+                ", ".join(structured_name_fields)
+            )
+            raise ValidationError(msg)
