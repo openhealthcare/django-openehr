@@ -108,7 +108,7 @@ class TherapeuticDirectionDosage(models.Model):
     # min: >=1
     dosage_sequence = models.IntegerField(
         blank=True, null=True,
-        help_text="The intended position of this dosage within the overall sequence of dosages."
+        help_text="The intended position of this dosage within the overall sequence of dosages.",
         validators=[MinValueValidator(1)]
     )
 
@@ -125,7 +125,7 @@ class TherapeuticDirectionDosage(models.Model):
         blank=True, null=True,
         max_digits=10,
         decimal_places=3,
-        help_text="The value of the amount of medication administered at one time, as a real number, or range of real numbers, and associated with the Dose unit."
+        help_text="The value of the amount of medication administered at one time, as a real number, or range of real numbers, and associated with the Dose unit.",
         validators=[MinValueValidator(0.01)]
     )
 
