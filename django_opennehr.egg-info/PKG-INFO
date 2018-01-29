@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: django-opennehr
+Version: 0.0.1
+Summary: openehr archetypes rendered as Django models
+Home-page: https://github.com/openhealthcare/django-openehr
+Author: Open Health Care UK / Dr Marcus Baw / David Miller
+Author-email: UNKNOWN
+License: MIT
+Description-Content-Type: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

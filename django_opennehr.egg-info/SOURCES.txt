@@ -1,0 +1,6 @@
+README.md
+django_opennehr.egg-info/PKG-INFO
+django_opennehr.egg-info/SOURCES.txt
+django_opennehr.egg-info/dependency_links.txt
+django_opennehr.egg-info/not-zip-safe
+django_opennehr.egg-info/top_level.txt
