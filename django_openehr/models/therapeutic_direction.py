@@ -36,7 +36,7 @@ class TherapeuticDirection(models.Model):
     )
     # Duration >=0 seconds
     direction_duration_seconds = models.IntegerField(
-        validators=[MinValueValidator(0)]
+        validators=[MinValueValidator(0)],
         blank=True, null=True
     )
     # Text
@@ -50,7 +50,7 @@ class TherapeuticDirection(models.Model):
     # min: >=1
     maximum_administrations = models.IntegerField(
         blank=True, null=True,
-        validators=[MinValueValidator(1)]
+        validators=[MinValueValidator(1)],
         help_text="The maximum number of administrations to be given for this direction."
     )
 
