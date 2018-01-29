@@ -10,7 +10,7 @@ class TherapeuticDirection(models.Model):
     # min: >=1
     direction_sequence = models.IntegerField(
         blank=True, null=True,
-        help_text="The intended position of this direction within the overall sequence of directions."
+        help_text="The intended position of this direction within the overall sequence of directions.",
         validators=[MinValueValidator(1)]
     )
     # Dosage Implemented in TherapeuticDirectionDosage
