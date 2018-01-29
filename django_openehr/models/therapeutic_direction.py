@@ -95,7 +95,9 @@ class TherapeuticDirection(models.Model):
 
 
 class TherapeuticDirectionDosage(models.Model):
-    therapeutic_direction = models.ForeignKey(TherapeuticDirection)
+    therapeutic_direction = models.ForeignKey(
+        TherapeuticDirection,
+        on_delete=models.CASCADE)
     # openEHR-EHR-CLUSTER.dosage.v1 and specialisations
 
     # Dosage sequence
