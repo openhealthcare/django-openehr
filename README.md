@@ -1,4 +1,6 @@
 # django-openehr
+<a href="https://badge.fury.io/py/django_openehr"><img src="https://badge.fury.io/py/django_openehr.svg" alt="PyPI version" height="18"></a>
+
 alpha software | unsupported
 
 experimental django models based on openEHR archetypes and distributed as a PyPi package

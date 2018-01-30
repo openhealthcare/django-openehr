@@ -1,14 +1,11 @@
 from django.db import models
-from django_openehr.models.demographics import Demographics
 
 
 class TelecomDetails(models.Model):
     # implements openEHR-EHR-CLUSTER.telecom_uk.v1
 
-    demographics = models.ForeignKey(
-        Demographics,
-        on_delete=models.CASCADE
-    )
+    class Meta():
+        verbose_name_plural = "Telecoms Details"
 
     # suspected typo in archetype openEHR-EHR-CLUSTER.telecom_uk.v1
     # first field 'unstuctured_telcoms' should be 'UnstRuctured telEcoms'
