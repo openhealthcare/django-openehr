@@ -1,15 +1,11 @@
 from django.db import models
-from django_openehr.models.demographics import Demographics
 
 
 class AddressDetails(models.Model):
-
     # implements openEHR-EHR-CLUSTER.address.v1
 
-    demographics = models.ForeignKey(
-        Demographics,
-        on_delete=models.CASCADE
-    )
+    class Meta():
+        verbose_name_plural = "addresses"
 
     ADDRESS_TYPE_CHOICES = (
         ("RESIDENTIAL", "Residential"),

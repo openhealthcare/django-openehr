@@ -3,9 +3,18 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class BodySite(models.Model):
-    pass
+    body_site_name = models.CharField(
+        null=True,
+        blank=True,
+        max_length=255,
+        help_text="The identifier of the body site, using a recognised clinical terminology where possible"
+    )
+
 
 class SymptomSign(models.Model):
+
+    class Meta():
+        verbose_name_plural = "Symptoms/Signs"
     # Symptom/Sign name
     # Text
     # Mandatory
