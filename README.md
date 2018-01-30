@@ -10,28 +10,29 @@ The intention is to explore the minimum range of archetypes required to build a 
 ## Templates included (in the demo app)
 | template | form |
 |----------|------|
-| IDCR Transfer of Care summary (minimal).v0 | IDCR template |
+| IDCR Transfer of Care summary (minimal).v0        | IDCR template |
 
 ## Archetypes included
 | archetype | model |
 | --------- | ----- |
-| openEHR-EHR-CLUSTER.individual_personal_uk.v1 | models/demographics.py |
-| openEHR-EHR-CLUSTER.person_name.v1            | models/person_name.py |
-| openEHR-EHR-CLUSTER.symptom_sign.v1           | models/symptom_sign/py |
-| openEHR-EHR-CLUSTER.address.v1                | models/address_details.py |
-| openEHR-EHR-CLUSTER.telecom_uk.v1             | models/telecom_details.py |
-| openEHR-EHR-CLUSTER.therapeutic_direction.v1  | models/therapeutic_direction.py |
+| openEHR-EHR-CLUSTER.person_name.v1                | models/person_name.py |
+| openEHR-EHR-CLUSTER.individual_personal_uk.v1     | models/demographic_personal.py |
+| openEHR-EHR-CLUSTER.individual_professional_uk.v1 | models/demographic_professional.py |
+| openEHR-EHR-CLUSTER.symptom_sign.v1               | models/symptom_sign/py |
+| openEHR-EHR-CLUSTER.address.v1                    | models/address_details.py |
+| openEHR-EHR-CLUSTER.telecom_uk.v1                 | models/telecom_details.py |
+| openEHR-EHR-CLUSTER.therapeutic_direction.v1      | models/therapeutic_direction.py |
 
 ## Reference Model artefacts converted
 | RM artefact | model |
 |-------------|-------|
-| DV_IDENTIFIER | models/identifier.py |
+| DV_IDENTIFIER                                     | models/identifier.py |
 
 
 ## Method/Approach
 * For this experiment/proof of concept, we have attempted to emulate in Django the 2-level clinical modelling paradigm of openEHR.
 
-* openEHR Archetypes have been recreated as Django models. In Django (as in many web frameworks), models are Python classes, instances of which can be assigned data attributes, and these data attributes map to rows in a database table. Django contains an object-relational mapper (ORM) which handles this abstraction atuomatically.
+* openEHR Archetypes have been recreated as Django models. In Django (as in many web frameworks), models are Python classes, instances of which can be assigned data attributes, and these data attributes map to rows in a database table. Django contains an object-relational mapper (ORM) which handles this abstraction automatically.
 
 * openEHR Templates have been rendered as Django forms, which form the second layer of our modelling tooling, allowing constraint and specialisation of our Django model (= our archetype)
 

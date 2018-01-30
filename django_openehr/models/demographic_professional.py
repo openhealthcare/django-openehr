@@ -5,6 +5,7 @@ from django_openehr.models.telecom_details import TelecomDetails
 
 
 class DemographicProfessional(models.Model):
+    # openEHR-EHR-CLUSTER.individual_professional_uk.v1
 
     class Meta():
         verbose_name_plural = "Professional Demographics"
