@@ -4,6 +4,9 @@ from django.db import models
 class ReasonForEncounter(models.Model):
     # implements openEHR-EHR-EVALUATION.reason_for_encounter.v1
 
+    class Meta():
+        verbose_name_plural = "Reasons for Encounter"
+
     # Contact type
     # Text
     # Optional, repeating
