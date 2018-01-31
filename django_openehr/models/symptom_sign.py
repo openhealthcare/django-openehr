@@ -51,7 +51,6 @@ class SymptomSign(models.Model):
     # recommended use is to use clinical terminology
     body_site = models.ManyToManyField(
         BodySite,
-        null=True,
         blank=True,
         help_text="Simple body site where the symptom or sign was reported."
     )
@@ -381,7 +380,6 @@ class SymptomSign(models.Model):
     # MB: handled as a ManyToManyField recursive to self
     associated_symptom_sign = models.ManyToManyField(
         "self",
-        null=True,
         blank=True,
         help_text="Structured details about any associated symptoms or signs that are concurrent."
     )

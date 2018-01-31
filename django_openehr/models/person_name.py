@@ -68,6 +68,7 @@ class PersonName(models.Model):
 
     # text:mandatory
     given_name = models.CharField(
+        null=True,  # nullable on DB to avoid a default value
         max_length=255,
         help_text="Given / personal / first name."
     )
@@ -83,6 +84,7 @@ class PersonName(models.Model):
 
     # family_name:text:mandatory
     family_name = models.CharField(
+        null=True,  # nullable on DB to avoid a default value
         max_length=255,
         help_text="Family name or Surname.")
 

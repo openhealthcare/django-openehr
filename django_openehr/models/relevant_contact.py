@@ -16,10 +16,12 @@ class RelevantContact(models.Model):
     # NOTE the archetype for relevant contact does not specify a type of archetype that can go in this slot, however the intended use (IDCR ToC Template) specifies Person Name and Telecom Details.
     person_name = models.ManyToManyField(
         PersonName,
+        blank=True,
     )
 
     telecom_details = models.ManyToManyField(
         TelecomDetails,
+        blank=True,
     )
 
     # Relationship category
@@ -74,3 +76,6 @@ class RelevantContact(models.Model):
         auto_now_add=False,
         help_text="The date at which the list of key contacts was created or updated.",
     )
+
+    def __str__(self):
+        return "Contact: " + self.relationship_note
