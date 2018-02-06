@@ -13,16 +13,7 @@ class RelevantContact(models.Model):
     # Include:
     # All not explicitly excluded archetypes
 
-    # NOTE the archetype for relevant contact does not specify a type of archetype that can go in this slot, however the intended use (IDCR ToC Template) specifies Person Name and Telecom Details.
-    person_name = models.ManyToManyField(
-        PersonName,
-        blank=True,
-    )
-
-    telecom_details = models.ManyToManyField(
-        TelecomDetails,
-        blank=True,
-    )
+    # NOTE the archetype for relevant contact does not specify a type of archetype that can go in this slot, however the intended use (IDCR ToC Template) uses openEHR-EHR-CLUSTER.individual_professional_uk.v1
 
     # Relationship category
     # Coded Text

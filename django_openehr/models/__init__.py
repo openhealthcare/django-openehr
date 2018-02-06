@@ -1,17 +1,19 @@
-from django_openehr.models.address_details import AddressDetails
-from django_openehr.models.demographic_personal import DemographicPersonal
-from django_openehr.models.demographic_professional import DemographicProfessional
-from django_openehr.models.identifier import Identifier
-from django_openehr.models.inpatient_admission import InpatientAdmission
-from django_openehr.models.person_name import PersonName
-from django_openehr.models.reason_for_encounter import ReasonForEncounter
-from django_openehr.models.relevant_contact import RelevantContact
-from django_openehr.models.symptom_sign import BodySite, SymptomSign
-from django_openehr.models.telecom_details import TelecomDetails
-from django_openehr.models.therapeutic_direction import TherapeuticDirection, TherapeuticDirectionDosage
+from .address_details import AddressDetails
+from .adverse_reaction import AdverseReaction
+from .demographic_personal import DemographicPersonal
+from .demographic_professional import DemographicProfessional
+from .identifier import Identifier
+from .inpatient_admission import InpatientAdmission
+from .person_name import PersonName
+from .reason_for_encounter import ReasonForEncounter
+from .relevant_contact import RelevantContact
+from .symptom_sign import BodySite, SymptomSign
+from .telecom_details import TelecomDetails
+from .therapeutic_direction import TherapeuticDirection, TherapeuticDirectionDosage
 
 __all__ = [
     'AddressDetails',
+    'AdverseReaction',
     'BodySite',
     'DemographicPersonal',
     'DemographicProfessional',

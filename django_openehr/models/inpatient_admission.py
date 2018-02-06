@@ -8,11 +8,11 @@ class InpatientAdmission(models.Model):
     # Date of admission
     # Date/Time
     # Optional
-    # Date patient admitted to hospital.
     date_of_admission = models.DateTimeField(
         null=True, blank=True,
         auto_now=False,
-        auto_now_add=False
+        auto_now_add=False,
+        help_text="Date patient admitted to hospital"
     )
 
     # Admission method
