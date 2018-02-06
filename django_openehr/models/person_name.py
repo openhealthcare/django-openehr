@@ -106,3 +106,11 @@ class PersonName(models.Model):
         blank=True,
         help_text="The date until which this name was valid."
     )
+
+    def __str__(self):
+        if (self.given_name and self.given_name):
+            return self.given_name + ' ' + self.family_name
+        elif self.unstructured_name:
+            return self.unstructured_name
+        else:
+            return 'anonymous'
