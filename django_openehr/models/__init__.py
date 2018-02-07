@@ -1,6 +1,6 @@
 from .address_details import AddressDetails
 from .adverse_reaction import AdverseReaction
-from .body_site import BodySite
+from .clinical_synopsis import ClinicalSynopsis
 from .demographic_personal import DemographicPersonal
 from .demographic_professional import DemographicProfessional
 from .identifier import Identifier
@@ -19,7 +19,7 @@ from .therapeutic_direction import (
 __all__ = [
     'AddressDetails',
     'AdverseReaction',
-    'BodySite',
+    'ClinicalSynopsis',
     'DemographicPersonal',
     'DemographicProfessional',
     'Identifier',

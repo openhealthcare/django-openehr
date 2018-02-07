@@ -1,5 +1,4 @@
 from django.db import models
-from .body_site import BodySite
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -41,10 +40,11 @@ class SymptomSign(models.Model):
     # Text
     # Optional, repeating
     # recommended use is to use clinical terminology
-    body_site = models.ManyToManyField(
-        BodySite,
+    body_site_name = models.CharField(
+        null=True,
         blank=True,
-        help_text="Simple body site where the symptom or sign was reported."
+        max_length=255,
+        help_text="The identifier of the body site, using a recognised clinical terminology where possible"
     )
 
     # Structured body site has been OMITTED in favour of using terminology
