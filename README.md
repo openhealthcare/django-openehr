@@ -1,9 +1,9 @@
 # django-openehr
 <a href="https://badge.fury.io/py/django_openehr"><img src="https://badge.fury.io/py/django_openehr.svg" alt="PyPI version" height="18"></a>
 
-alpha software | unsupported
+Alpha software | Unsupported
 
-Experimental django models based on openEHR archetypes and distributed as a PyPi package, with an accompanying demo Django application, showing the implementation of a single openEHR Template as a Django Form composed of data fields from the correct underliying openEHR Archetypes, as defined in the Template on the [UK Apperta Clinical Knowledge Manager](http://ckm.apperta.org/ckm/)
+Experimental django models based on openEHR archetypes and distributed as a PyPi package, with an accompanying demo Django application, showing the implementation of a single openEHR Template as a Django Form composed of data fields from the correct underlying openEHR Archetypes, as defined in the Template on the [UK Apperta Clinical Knowledge Manager](http://ckm.apperta.org/ckm/)
 
 The intentions of the experiment are:
 
@@ -51,7 +51,7 @@ _all data from each CKM archetype has been retained as comments in the respectiv
 
 * Practically, in the absence of an automatable mechanism for creating Django forms from openEHR archetypes, we simply copied and pasted the text from the 'Data' tab of the UK openEHR Clinical Knowledge Manager for each archetype into a text editor. We then reformatted the archetype into a Django model (or model_s_), mapping field types, validations, maxima and minima into their Django idiomatic equivalents. We kept as much contextual information as possible in `# comment` form.
 
-* Models were quite large and therefore for better readbility and also in an effort to optimise the re-use potential of the models, they have been separated out from `models.py` into individual files under the `/models/`` directory, importable as a module because of the `__init__.py` containing an `__all__` list.
+* Models were quite large and therefore for better readbility and also in an effort to optimise the re-use potential of the models, they have been separated out from `models.py` into individual files under the `/models/` directory, importable as a module because of the `__init__.py` containing an `__all__` list.
 
 ## Notes
 * openEHR implementations tend to store data in documents rather than in relational tables, hence it's possible that in the conversion of Archetypes to Django models we will encounter modelled entities which are impractical to model in a relational fashion, however so far we've been able to model most things that made sense to model.
