@@ -1,5 +1,4 @@
 from django.db import models
-from .body_site import BodySite
 
 
 class ProblemDiagnosis(models.Model):
@@ -31,10 +30,11 @@ class ProblemDiagnosis(models.Model):
     # Text
     # Optional, repeating
     # Comment: Coding of the name of the anatomical location with a terminology is preferred, where possible. Use this data element to record precoordinated anatomical locations. If the requirements for recording the anatomical location are determined at run-time by the application or require more complex modelling such as relative locations then use the CLUSTER.anatomical_location or CLUSTER.relative_location within the 'Structured anatomical location' SLOT in this archetype. Occurrences for this data element are unbounded to allow for clinical scenarios such as describing a rash in multiple locations but where all of the other attributes are identical. If the anatomical location is included in the # Problem/diagnosis name via precoordinated codes, this data element becomes redundant.
-    body_site = models.ManyToManyField(
-        BodySite,
+    body_site_name = models.CharField(
+        null=True,
         blank=True,
-        help_text="Identification of a simple body site for the location of the problem or diagnosis",
+        max_length=255,
+        help_text="The identifier of the body site, using a recognised clinical terminology where possible"
     )
 
     # Structured body site has been OMITTED in favour of using terminology
