@@ -1,14 +1,6 @@
 from django.db import models
+from .body_site import BodySite
 from django.core.validators import MaxValueValidator, MinValueValidator
-
-
-class BodySite(models.Model):
-    body_site_name = models.CharField(
-        null=True,
-        blank=True,
-        max_length=255,
-        help_text="The identifier of the body site, using a recognised clinical terminology where possible"
-    )
 
 
 class SymptomSign(models.Model):
@@ -57,19 +49,6 @@ class SymptomSign(models.Model):
 
     # Structured body site has been OMITTED in favour of using terminology
     # in the Body Site field above.
-    # Slot ( Cluster)
-    # Optional, repeating
-    # Structured body site where the symptom or sign was reported.
-    # Comment: If the anatomical location is included in the Symptom name via
-    # precoordinated codes, use of this SLOT becomes redundant. If the
-    # anatomical location is recorded using the 'Body site' data element,
-    # then use of CLUSTER archetypes in this SLOT is not allowed
-    # - record only the simple 'Body site' OR 'Structured body site'
-    # but not both.
-    # Include:
-    # openEHR-EHR-CLUSTER.anatomical_location.v1 and specialisations Or
-    # openEHR-EHR-CLUSTER.anatomical_location_clock.v0 Or
-    # openEHR-EHR-CLUSTER.anatomical_location_relative.v1
 
     # Episodicity
     # Coded Text
@@ -367,37 +346,35 @@ class SymptomSign(models.Model):
     # Previous episodes
     # Slot ( Cluster)
     # Optional, repeating
-    # Structured details of the symptom or sign during a previous episode.
-    #  Comment: In linked clinical systems, it is possible that previous
-    #  episodes are already recorded within the EHR. Systems can allow the
-    #  clinician to LINK to relevant previous episodes. However in a system or
-    #  message without LINKs to existing data or with a new patient, additional
-    #  instances of the symptom archetype could be included here to represent
-    #  previous episodes. It is recommended that new instances of the Symptom
-    #  archetype inserted in this SLOT represent one or many previous # episodes
-    #  to this Symptom instance only.
+    # Comment: In linked clinical systems, it is possible that previous
+    # episodes are already recorded within the EHR. Systems can allow the
+    # clinician to LINK to relevant previous episodes. However in a system or
+    # message without LINKs to existing data or with a new patient, additional
+    # instances of the symptom archetype could be included here to represent
+    # previous episodes. It is recommended that new instances of the Symptom
+    # archetype inserted in this SLOT represent one or many previous # episodes
+    # to this Symptom instance only.
     # openEHR-EHR-CLUSTER.symptom_sign.v0 and specialisations
     # MB: handled as a ManyToManyField recursive to self
-    associated_symptom_sign = models.ManyToManyField(
+    previous_episodes = models.ManyToManyField(
         "self",
         blank=True,
-        help_text="Structured details about any associated symptoms or signs that are concurrent."
+        help_text="Structured details of the symptom or sign during a previous episode"
     )
 
     # Associated symptom/sign
     # Slot ( Cluster)
     # Optional, repeating
-    #  Comment: In linked clinical systems, it is possible that associated
-    #  symptoms or signs are already recorded within the EHR. Systems can allow
-    #  the clinician to LINK to relevant associated symptoms/signs. However in a
-    #  system or message without LINKs to existing data or with a new patient,
-    #  additional instances of the symptom archetype could be included here to
-    #  represent # associated symptoms/signs.
-    #  openEHR-EHR-CLUSTER.symptom_sign.v0 and specialisations
-    #  MB: handled as a ManyToManyField recursive to self
+    # Comment: In linked clinical systems, it is possible that associated
+    # symptoms or signs are already recorded within the EHR. Systems can allow
+    # the clinician to LINK to relevant associated symptoms/signs. However in a
+    # system or message without LINKs to existing data or with a new patient,
+    # additional instances of the symptom archetype could be included here to
+    # represent # associated symptoms/signs.
+    # openEHR-EHR-CLUSTER.symptom_sign.v0 and specialisations
+    # MB: handled as a ManyToManyField recursive to self
     associated_symptom_sign = models.ManyToManyField(
         "self",
-        null=True,
         blank=True,
         help_text="Structured details about any associated symptoms or signs that are concurrent."
     )
