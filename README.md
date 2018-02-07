@@ -1,4 +1,4 @@
-s# django-openehr
+# django-openehr
 <a href="https://badge.fury.io/py/django_openehr"><img src="https://badge.fury.io/py/django_openehr.svg" alt="PyPI version" height="18"></a>
 
 alpha software | unsupported
@@ -21,7 +21,7 @@ The intentions of the experiment are:
 | -------------| ----------------- |
 | models/address_details.py                 | openEHR-EHR-CLUSTER.address.v1 |
 | models/adverse_reaction.py                | openEHR-EHR-EVALUATION.adverse_reaction_uk.v1 |
-| models/body_site.py                       | not from a specific archetype |
+| models/clinical_synopsis.py               | openEHR-EHR-EVALUATION.clinical_synopsis.v1
 | models/demographic_personal.py            | openEHR-EHR-CLUSTER.individual_personal_uk.v1 |
 | models/demographic_professional.py        | openEHR-EHR-CLUSTER.individual_professional_uk.v1 |
 | models/inpatient_admission.py             | openEHR-EHR-ADMIN_ENTRY.inpatient_admission_uk.v1 |
