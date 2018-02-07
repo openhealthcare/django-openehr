@@ -75,3 +75,9 @@ class TelecomDetails(models.Model):
         null=True,
         blank=True,
         help_text="the context of use of this telecom contact eg Home, Work, Business")
+
+    def __str__(self):
+        if self.number:
+            return self.number
+        else:
+            return ''

@@ -1,6 +1,4 @@
 from django.db import models
-from django_openehr.models.person_name import PersonName
-from django_openehr.models.telecom_details import TelecomDetails
 
 
 class RelevantContact(models.Model):
@@ -13,7 +11,9 @@ class RelevantContact(models.Model):
     # Include:
     # All not explicitly excluded archetypes
 
-    # NOTE the archetype for relevant contact does not specify a type of archetype that can go in this slot, however the intended use (IDCR ToC Template) uses openEHR-EHR-CLUSTER.individual_professional_uk.v1
+    # NOTE the archetype for relevant contact does not specify the archetype that can
+    # go in this slot, however the intended use (IDCR ToC Template) uses
+    # openEHR-EHR-CLUSTER.individual_professional_uk.v1
 
     # Relationship category
     # Coded Text
