@@ -142,6 +142,14 @@ class ProblemDiagnosis(models.Model):
         help_text="The level of confidence in the identification of the diagnosis"
     )
 
+    # Last updated
+    # Date/Time
+    # Optional
+    last_updated = models.DateTimeField(
+        blank=True, null=True,
+        help_text="The date this problem or diagnosis was last updated",
+    )
+
     # Comment
     # Text
     # Optional
