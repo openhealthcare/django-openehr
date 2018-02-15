@@ -159,8 +159,8 @@ class ProblemDiagnosis(models.Model):
         help_text="Any random comment you can't fit into one of the other 572 fields in this archetype"
     )
 
-    def __str__():
-        if problem_diagnosis_name:
-            return problem_diagnosis_name
+    def __str__(self):
+        if self.problem_diagnosis_name:
+            return self.problem_diagnosis_name
         else:
             return "anonymous problem / diagnosis"

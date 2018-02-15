@@ -79,5 +79,7 @@ class TelecomDetails(models.Model):
     def __str__(self):
         if self.number:
             return self.number
+        elif self.unstructured_telecoms:
+            return self.unstructured_telecoms
         else:
-            return ''
+            return 'telephone number not held'

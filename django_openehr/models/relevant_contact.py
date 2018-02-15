@@ -69,4 +69,7 @@ class RelevantContact(models.Model):
     )
 
     def __str__(self):
-        return "Contact: " + self.relationship_note
+        if self.relationship_note:
+            return "Contact: " + self.relationship_note
+        else:
+            return ""
