@@ -47,7 +47,7 @@ _all data from each CKM archetype has been retained as comments in the respectiv
 
 * **openEHR Templates have been rendered as Django Forms**, which form the second layer of our modelling tooling, allowing constraint and specialisation of our Django model (= our archetype)
 
-* Practically, in the absence of an automatable mechanism for creating Django forms from openEHR archetypes, we simply copied and pasted the text from the 'Data' tab of the UK openEHR Clinical Knowledge Manager for each archetype into a text editor. We then reformatted the archetype into a Django model (or model_s_), mapping field types, validations, maxima and minima into their Django idiomatic equivalents. We kept as much contextual information as possible in `# comment` form.
+* Practically, in the absence of an automatable mechanism for creating Django forms from openEHR archetypes, we simply copied and pasted the text from the 'Data' tab of the UK openEHR Clinical Knowledge Manager for each archetype into a text editor. We then reformatted the archetype into a Django model (or model_s_), mapping field types, validations, maxima and minima into their Django idiomatic equivalents. We kept as much contextual information as possible in `#comment` form.
 
 * Models were quite large and therefore for better readbility and also in an effort to optimise the re-use potential of the models, they have been separated out from `models.py` into individual files under the `/models/` directory, importable as a module because of the `__init__.py` containing an `__all__` list.
 
@@ -56,27 +56,53 @@ _all data from each CKM archetype has been retained as comments in the respectiv
 ### Upstream Issues with Archetypes
 * Where issues have arisen regarding upstream archetypes or templates, I've created a GitHub issue in this repo as placeholder/record, and then I've passed the issue back to the UK CKM via it's own internal Change Request method.
 
-## Installing these models in your Django application
+# Installation
+
+## Installing the package
 * This package has been designed to be a reusable group of clinical models drawn from a canonical source (UK CKM), which can be used in other applications.
-* To use it in your own Django project or app, you simply need to install the package:
+* To use it in your own Django project or app, you need to install the package via the command line/terminal:
 ```
 pip install django_openehr
 ```
 or
-add `django_openehr` to your requirements.txt file
-`pip install -r requirements.txt`
 
-* add to your INSTALLED_APPS
-* makemigrations
-* migrate
+add `django_openehr` to your requirements.txt file, and then run 
+```
+pip install -r requirements.txt
+```
+
+## Adding these models to an existing Django application
+* you may need to adapt these instructions to the specifics of your Django application, since we haven't tested every use-case. If you have problems please feel free to raise an [Issue](https://github.com/openhealthcare/django-openehr/issues) about it, we may be able to help.
+* add `django_openehr` to the INSTALLED_APPS list in settings.py
+* make the database migrations
+```
+python manage.py makemigrations
+```
+* apply the migrations
+```
+python manage.py migrate
+```
 * register the models with the Django Admin if you want to be able to manipulate these models in the Admin view. You can see an example of how to do this [here](https://github.com/openhealthcare/django-openehr-demo-app/blob/master/django_openehr_demo/admin.py)
-* `python manage.py runserver`
+* start the development server
+```
+python manage.py runserver
+```
 
-## Interact using the Django shell
+## Interacting with the models using the Django shell
 * install as per above instructions, including migration steps
-* `python manage.py shell`
-
-
+* invoke the Django shell
+```
+python manage.py shell
+```
+* import the models
+```
+from django_openehr import models
+```
+* you can then interact with the models and the data in your database using the standard DJango ORM API, eg:
+```
+>>> models.PersonName.objects.first().given_name
+'Marcus'
+```
 
 ------
 
