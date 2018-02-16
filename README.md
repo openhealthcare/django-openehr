@@ -3,12 +3,12 @@
 
 Alpha software | Unsupported
 
-Experimental django models based on openEHR archetypes and distributed as a PyPi package, with an accompanying demo Django application, showing the implementation of a single openEHR Template as a Django Form composed of data fields from the correct underlying openEHR Archetypes, as defined in the Template on the [UK Apperta Clinical Knowledge Manager](http://ckm.apperta.org/ckm/)
+Experimental [Django](https://www.djangoproject.com/) models based on [openEHR](http://www.openehr.org/) archetypes and distributed as a Python Package on [PyPi](https://pypi.python.org/pypi), with an accompanying [demo Django application](https://github.com/openhealthcare/django-openehr-demo-app), showing the implementation of a single openEHR Template as a Django Form composed of data fields from the correct underlying openEHR Archetypes, as defined in the Template on the [UK Apperta Clinical Knowledge Manager](http://ckm.apperta.org/ckm/)
 
 The intentions of the experiment are:
 
-* to learn more about the internal structure of openEHR by creating a 'toy' using these archetypes.
-* to explore the feasibility of 'misusing' openEHR archetypes as a 'source of clinical modelling truth' when data-modelling a web application in Django (or any other web framework)
+* to learn more about the internal structure of openEHR by creating a 'toy' set of models using these archetypes.
+* to explore the feasibility of 'misusing' the freely published openEHR archetypes as a 'source of clinical modelling truth' when data-modelling a web application in Django (or any other web framework), as opposed to using openEHR as a technical layer in the intended manner.
 * to understand the minimum range of archetypes required to build a proof of concept EHR app.
 
 ## Templates included (in the demo app)
@@ -40,24 +40,48 @@ _all data from each CKM archetype has been retained as comments in the respectiv
 |--------------|----------------------------------|
 | DV_IDENTIFIER            | models/identifier.py |
 
-
-
 ## Method/Approach
-* For this experiment/proof of concept, we have attempted to emulate in Django the 2-level clinical modelling paradigm of openEHR.
+* For this experiment/proof of concept, we have attempted to emulate in Django the two-level clinical modelling paradigm of openEHR (archetypes and templates), a paradigm which is also shared by other clinical modelling technologies such as FHIR (resources and profiles)
 
-* openEHR Archetypes have been recreated as Django models. In Django (as in many web frameworks), models are Python classes, instances of which can be assigned data attributes, and these data attributes map to rows in a database table. Django contains an object-relational mapper (ORM) which handles this abstraction automatically.
+* **openEHR Archetypes have been recreated as Django models**. In Django (as in many web frameworks), models are Classes, instances of which can be assigned data attributes, and these data attributes for a given instance map to a given row in a database table. Django contains an object-relational mapper (ORM) which handles this abstraction automatically, and numerous convenience methods which simplify access to related objects through foreign key or join-table relationships.
 
-* openEHR Templates have been rendered as Django forms, which form the second layer of our modelling tooling, allowing constraint and specialisation of our Django model (= our archetype)
+* **openEHR Templates have been rendered as Django Forms**, which form the second layer of our modelling tooling, allowing constraint and specialisation of our Django model (= our archetype)
 
 * Practically, in the absence of an automatable mechanism for creating Django forms from openEHR archetypes, we simply copied and pasted the text from the 'Data' tab of the UK openEHR Clinical Knowledge Manager for each archetype into a text editor. We then reformatted the archetype into a Django model (or model_s_), mapping field types, validations, maxima and minima into their Django idiomatic equivalents. We kept as much contextual information as possible in `# comment` form.
 
 * Models were quite large and therefore for better readbility and also in an effort to optimise the re-use potential of the models, they have been separated out from `models.py` into individual files under the `/models/` directory, importable as a module because of the `__init__.py` containing an `__all__` list.
 
-## Notes
 * openEHR implementations tend to store data in documents rather than in relational tables, hence it's possible that in the conversion of Archetypes to Django models we will encounter modelled entities which are impractical to model in a relational fashion, however so far we've been able to model most things that made sense to model.
 
-## Issues
-* where Issues have arisen regarding upstream archetypes or an inability to accurately convert the archetype into a Django model, I've created a GitHub issue for it. In time we will pass upstream Issues back to the UK CKM in whatever way is preferred.
+### Upstream Issues with Archetypes
+* Where issues have arisen regarding upstream archetypes or templates, I've created a GitHub issue in this repo as placeholder/record, and then I've passed the issue back to the UK CKM via it's own internal Change Request method.
 
-## Contributing
+## Installing these models in your Django application
+* This package has been designed to be a reusable group of clinical models drawn from a canonical source (UK CKM), which can be used in other applications.
+* To use it in your own Django project or app, you simply need to install the package:
+```
+pip install django_openehr
+```
+or
+add `django_openehr` to your requirements.txt file
+`pip install -r requirements.txt`
+
+* add to your INSTALLED_APPS
+* makemigrations
+* migrate
+* register the models with the Django Admin if you want to be able to manipulate these models in the Admin view. You can see an example of how to do this [here](https://github.com/openhealthcare/django-openehr-demo-app/blob/master/django_openehr_demo/admin.py)
+* `python manage.py runserver`
+
+## Interact using the Django shell
+* install as per above instructions, including migration steps
+* `python manage.py shell`
+
+
+
+------
+
+## Contributing to this project
 * We welcome contributions from the community, and are happy to consider pull requests for bugfixes, optimisations and new archetypes.
+* For new Archetype contributions, please follow the one-model-per-file pattern used throughout this package. We accept that this is not traditionally a Django idiom (Rails is all over it though :-) ), but it helps with organising the models, which can become very large and would be unwieldy in a single file.
+* Please also consider updating the forms and details views in the [companion Demo Application](https://github.com/openhealthcare/django-openehr-demo-app) with your new models
+* We welcome discussion regarding this package in the [Issues](https://github.com/openhealthcare/django-openehr/issues)
