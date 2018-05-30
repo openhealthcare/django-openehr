@@ -3,7 +3,7 @@
 
 Experimental | Not officially supported by OHCUK
 
-![supported_by_apperta_lores.png](https://github.com/AppertaFoundation/apperta-image-assets/blob/master/supported_by_apperta_lores.png)
+[![supported_by_apperta.png](https://github.com/AppertaFoundation/apperta-image-assets/blob/master/supported_by_apperta.png)](https://apperta.org/)
 
 Experimental [Django](https://www.djangoproject.com/) models based on [openEHR](http://www.openehr.org/) archetypes and distributed as a Python Package on [PyPi](https://pypi.python.org/pypi), with an accompanying [demo Django application](https://github.com/openhealthcare/django-openehr-demo-app), showing the implementation of a single openEHR Template as a Django Form composed of data fields from the correct underlying openEHR Archetypes, as defined in the Template on the [UK Apperta Clinical Knowledge Manager](http://ckm.apperta.org/ckm/)
 
